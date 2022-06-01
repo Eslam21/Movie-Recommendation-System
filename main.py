@@ -4,6 +4,10 @@ import matplotlib.pyplot as plt
 from seaborn import barplot
 import requests
 import pickle
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer 
+from sklearn.feature_extraction.text import HashingVectorizer
 
 #----------------------------------------------------------------------------------------------------------------------#
                 # Importing the Pickle file to get the dataframe of the movies #
