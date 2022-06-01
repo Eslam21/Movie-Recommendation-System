@@ -11,7 +11,7 @@ from sklearn.feature_extraction.text import HashingVectorizer
 
 #----------------------------------------------------------------------------------------------------------------------#
                             # Importing the Pickle file to get the dataframe of the movies #
-pickle_in = open('Movie_data.pkl', 'rb') 
+pickle_in = open('movie.pkl.pkl', 'rb') 
 movies = pickle.load(pickle_in)
 # ----------------------------------------------------------------------------------------------------------------------#
               #                              Vectorization functions                                     #
