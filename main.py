@@ -89,11 +89,11 @@ def recommend(movie,option):
     movie_index = movies[movies['title'] == movie].index[0]
     #('Bag of Words', 'TF-IDF', 'Hash Vectorizer'),)
     if option == 'Bag of Words':
-        distances = bag_of_words[movie_index]
+        distances = bag_of_words(movies)[movie_index]
     elif option == 'TF-IDF':
-        distances = tfidf_vectorizer[movie_index]
+        distances = tfidf_vectorizer(movies)[movie_index]
     else:
-        distances = hash_vectorizer[movie_index]        
+        distances = hash_vectorizer(movies)[movie_index]        
     movies_list = sorted(list(enumerate(distances)),reverse=True, key=lambda x:x[1])[0:21] # number of movies you want to display(note it have to be odd to avoid errors)
     mov=[]
     id=[]
