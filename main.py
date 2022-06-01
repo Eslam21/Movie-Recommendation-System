@@ -10,20 +10,29 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import HashingVectorizer
 
 #----------------------------------------------------------------------------------------------------------------------#
-                # Importing the Pickle file to get the dataframe of the movies #
-
+                            # Importing the Pickle file to get the dataframe of the movies #
 pickle_in = open('Movie_data.pkl', 'rb') 
 movies = pickle.load(pickle_in)
+# ----------------------------------------------------------------------------------------------------------------------#
+              #                              Vectorization functions                                     #
 
-pickle_in = open('countvectorizer.pkl', 'rb') 
-bagofwords = pickle.load(pickle_in)
+def bag_of_words(movies):
+    cv = CountVectorizer(max_features=5000,stop_words='english')
+    vectors = cv.fit_transform(movies['features']).toarray()
+    similarity = cosine_similarity(vectors) 
+    return similarity         
 
-pickle_in = open('Tfidf.pkl', 'rb') 
-tfidf = pickle.load(pickle_in)
+def tfidf_vectorizer(movies):
+    tfidf_vectorizer = TfidfVectorizer(max_features=5000,stop_words='english')
+    tfidf_matrix = tfidf_vectorizer.fit_transform(movies['features'])
+    return tfidf_matrix
 
-pickle_in = open('hashvec.pkl', 'rb') 
-hashvec = pickle.load(pickle_in)
-
+def hash_vectorizer(movies):
+    hv = HashingVectorizer(n_features=5000,stop_words='english')
+    vectors = hv.fit_transform(movies['features']).toarray()
+    similarity = cosine_similarity(vectors) 
+    return similarity    
+              
 #----------------------------------------------------------------------------------------------------------------------#
                   #                     Set of fuctions to use in the app                         #
 img=[] # to store images links 
@@ -80,11 +89,11 @@ def recommend(movie,option):
     movie_index = movies[movies['title'] == movie].index[0]
     #('Bag of Words', 'TF-IDF', 'Hash Vectorizer'),)
     if option == 'Bag of Words':
-        distances = bagofwords[movie_index]
+        distances = bag_of_words[movie_index]
     elif option == 'TF-IDF':
-        distances = tfidf[movie_index]
+        distances = tfidf_vectorizer[movie_index]
     else:
-        distances = hashvec[movie_index]        
+        distances = hash_vectorizer[movie_index]        
     movies_list = sorted(list(enumerate(distances)),reverse=True, key=lambda x:x[1])[0:21] # number of movies you want to display(note it have to be odd to avoid errors)
     mov=[]
     id=[]
