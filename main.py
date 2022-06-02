@@ -24,8 +24,8 @@ def bag_of_words(movies):
 
 def tfidf_vectorizer(movies):
     tfidf_vectorizer = TfidfVectorizer(max_features=5000,stop_words='english')
-    tfidf_matrix = tfidf_vectorizer.fit_transform(movies['features'])
-    return tfidf_matrix
+    similarity = tfidf_vectorizer.fit_transform(movies['features'])
+    return similarity
 
 def hash_vectorizer(movies):
     hv = HashingVectorizer(n_features=5000,stop_words='english')
