@@ -17,18 +17,19 @@ movies = pickle.load(pickle_in)
               #                              Vectorization functions                                     #
 
 def bag_of_words(movies):
-    cv = CountVectorizer(max_features=5000,stop_words='english')
+    cv = CountVectorizer(max_features=6000,stop_words='english')
     vectors = cv.fit_transform(movies['features']).toarray()
     similarity = cosine_similarity(vectors) 
     return similarity         
 
 def tfidf_vectorizer(movies):
-    tfidf_vectorizer = TfidfVectorizer(max_features=5000,stop_words='english')
-    similarity = tfidf_vectorizer.fit_transform(movies['features'])
+    tfidf_vectorizer = TfidfVectorizer(max_features=6000,stop_words='english')
+    tfidf_matrix = tfidf_vectorizer.fit_transform(movies['features'])
+    similarity = cosine_similarity(tfidf_matrix)
     return similarity
 
 def hash_vectorizer(movies):
-    hv = HashingVectorizer(n_features=5000,stop_words='english')
+    hv = HashingVectorizer(n_features=6000,stop_words='english')
     vectors = hv.fit_transform(movies['features']).toarray()
     similarity = cosine_similarity(vectors) 
     return similarity    
