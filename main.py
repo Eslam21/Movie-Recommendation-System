@@ -9,6 +9,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer 
 from sklearn.feature_extraction.text import HashingVectorizer
 
+
 #----------------------------------------------------------------------------------------------------------------------#
                             # Importing the Pickle file to get the dataframe of the movies #
 pickle_in = open('movie.pkl', 'rb') 
